@@ -13,4 +13,9 @@ CREATE TABLE "Settings" (
 "attr_int" INTEGER
 );
 
-
+-- Record sensor triggered time.
+CREATE TABLE "Sensors" (
+"id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+"triggered" INTEGER,
+"filename" TEXT
+);
