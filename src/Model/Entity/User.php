@@ -36,7 +36,7 @@ class User extends Entity
         'password'
     ];
 
-    protected function _set_password($password){
+    protected function _setPassword($password){
         return (new DefaultPasswordHasher())->hash($password);
     }
 }
