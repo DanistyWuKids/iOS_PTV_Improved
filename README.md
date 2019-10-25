@@ -14,7 +14,7 @@ The framework source code can be found here: [cakephp/cakephp](https://github.co
 1. Install following packages on raspberry pi.
 
 ```bash
-$ sudo apt-get install php php-cgi intl phpmbstring php-xml php-common
+$ sudo apt-get install php php-cgi php-intl php-mbstring php-xml php-common
 $ sudo apt-get install sqlite3 php-sqlite3 apache2
 ```
 
