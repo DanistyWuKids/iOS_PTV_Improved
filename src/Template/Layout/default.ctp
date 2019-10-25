@@ -163,6 +163,11 @@ use Cake\ORM\TableRegistry;
                         </div>
                     </li>
 
+                    <li class="nav-item dropdown no-arrow mx-1">    <!-- Nav Item - temporary disable detection -->
+                        <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button">
+                            <i class="fas fa-pause fa-fw"></i>
+                        </a>
+                    </li>
                     <li class="nav-item dropdown no-arrow mx-1">    <!-- Nav Item - shutdown -->
                         <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button">
                             <i class="fas fa-power-off fa-fw"></i>
@@ -252,3 +257,34 @@ echo $this->Html->script('sbadmin2/demo/chart-area-demo.js');
 echo $this->Html->script('sbadmin2/demo/chart-pie-demo.js');
 ?>
 </html>
+
+<script type="text/javascript">
+    var url = "ajax/pi.php";
+    $(function () {
+        $(".btn-trigger").click(function () {
+            var text = $(this).text().replace(/ /g, "").replace(/\n/g, "").replace(/\r/g, "").replace(/\t/g, "");
+            var cmd = "";
+            switch (text) {
+                case "shutdown":
+                    cmd = "sudo shutdown -h now";
+                    break;
+                case "restart":
+                    cmd = "sudo reboot";
+                    break;
+            }
+            if (confirm("Are you sure to do this?")) {
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data: {
+                        action: "set-linux-cmd",
+                        cmd: cmd
+                    },
+                    success: function (result) {
+                        $(".tip").html(result);
+                    }
+                });
+            }
+        });
+    });
+</script>
