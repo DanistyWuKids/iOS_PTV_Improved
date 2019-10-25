@@ -4,13 +4,15 @@ namespace App\Model\Entity;
 use Cake\ORM\Entity;
 
 /**
- * Sensor Entity
+ * Recording Entity
  *
  * @property int $id
- * @property int|null $triggered
- * @property string|null $filename
+ * @property \Cake\I18n\FrozenTime $recTime
+ * @property int $recTriggered
+ * @property int $recType
+ * @property string $recIp
  */
-class Sensor extends Entity
+class Recording extends Entity
 {
     /**
      * Fields that can be mass assigned using newEntity() or patchEntity().
@@ -22,7 +24,9 @@ class Sensor extends Entity
      * @var array
      */
     protected $_accessible = [
-        'triggered' => true,
-        'filename' => true
+        'recTime' => true,
+        'recTriggered' => true,
+        'recType' => true,
+        'recIp' => true
     ];
 }

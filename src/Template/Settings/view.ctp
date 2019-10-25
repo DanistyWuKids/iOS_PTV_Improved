@@ -17,16 +17,12 @@
     <h3><?= h($setting->id) ?></h3>
     <table class="vertical-table">
         <tr>
+            <th scope="row"><?= __('Attribute') ?></th>
+            <td><?= h($setting->attribute) ?></td>
+        </tr>
+        <tr>
             <th scope="row"><?= __('Id') ?></th>
             <td><?= $this->Number->format($setting->id) ?></td>
         </tr>
-        <tr>
-            <th scope="row"><?= __('Attr Int') ?></th>
-            <td><?= $this->Number->format($setting->attr_int) ?></td>
-        </tr>
     </table>
-    <div class="row">
-        <h4><?= __('Attr Text') ?></h4>
-        <?= $this->Text->autoParagraph(h($setting->attr_text)); ?>
-    </div>
 </div>

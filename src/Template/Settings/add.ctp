@@ -15,8 +15,7 @@
     <fieldset>
         <legend><?= __('Add Setting') ?></legend>
         <?php
-            echo $this->Form->control('attr_text');
-            echo $this->Form->control('attr_int');
+            echo $this->Form->control('attribute');
         ?>
     </fieldset>
     <?= $this->Form->button(__('Submit')) ?>

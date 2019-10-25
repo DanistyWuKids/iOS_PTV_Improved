@@ -7,8 +7,7 @@ use Cake\ORM\Entity;
  * Setting Entity
  *
  * @property int $id
- * @property string|null $attr_text
- * @property int|null $attr_int
+ * @property string $attribute
  */
 class Setting extends Entity
 {
@@ -22,7 +21,6 @@ class Setting extends Entity
      * @var array
      */
     protected $_accessible = [
-        'attr_text' => true,
-        'attr_int' => true
+        'attribute' => true
     ];
 }

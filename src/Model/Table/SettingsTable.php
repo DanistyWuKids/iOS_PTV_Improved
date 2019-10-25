@@ -48,12 +48,10 @@ class SettingsTable extends Table
             ->allowEmptyString('id', null, 'create');
 
         $validator
-            ->scalar('attr_text')
-            ->allowEmptyString('attr_text');
-
-        $validator
-            ->integer('attr_int')
-            ->allowEmptyString('attr_int');
+            ->scalar('attribute')
+            ->maxLength('attribute', 64)
+            ->requirePresence('attribute', 'create')
+            ->notEmptyString('attribute');
 
         return $validator;
     }
