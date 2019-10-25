@@ -94,7 +94,7 @@ use Cake\ORM\TableRegistry;
                 <div class="bg-white py-2 collapse-inner rounded">
                     <h6 class="collapse-header">Components:</h6>
                     <a class="collapse-item" href="<?= $this->Url->build(['controller'=>'Users','action'=>'index'])?>">View</a>
-                    <a class="collapse-item" href="<?= $this->Url->build(['controller'=>'Users','action'=>'setpw'])?>">Change password</a>
+                    <a class="collapse-item" href="<?= $this->Url->build(['controller'=>'Users','action'=>'edit',$this->request->getSession()->read('Auth.User')['id']])?>">Edit profile</a>
                 </div>
             </div>
         </li>
@@ -108,10 +108,9 @@ use Cake\ORM\TableRegistry;
             <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
                  data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
-                    <a class="collapse-item" href="utilities-color.html">Setting working time</a>
-                    <a class="collapse-item" href="utilities-border.html">Borders</a>
-                    <a class="collapse-item" href="utilities-animation.html">Animations</a>
-                    <a class="collapse-item" href="utilities-other.html">Other</a>
+                    <a class="collapse-item" href="<?= $this->Url->build(['controller'=>'Settings','action'=>'index'])?>">Set working time</a>
+                    <a class="collapse-item" href="<?= $this->Url->build(['controller'=>'Settings','action'=>'index'])?>">Set backup cloud</a>
+                    <a class="collapse-item" href="<?= $this->Url->build(['controller'=>'Settings','action'=>'index'])?>">Other</a>
                 </div>
             </div>
         </li>
