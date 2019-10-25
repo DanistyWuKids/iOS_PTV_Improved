@@ -26,6 +26,28 @@ class RecordingsController extends AppController
     }
 
     /**
+     * All method
+     *
+     * @param string|null $options Selection of video/photos
+     * @return \Cake\Http\Response|null
+     */
+    public function all($options = null)
+    {
+        $recordings = $this->paginate($this->Recordings);
+
+        $this->set(compact('recordings'));
+    }
+
+    /**
+     * All method
+     *
+     * @return \Cake\Http\Response|null
+     */
+    public function statics(){
+
+    }
+
+    /**
      * View method
      *
      * @param string|null $id Recording id.

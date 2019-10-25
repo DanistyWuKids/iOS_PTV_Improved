@@ -70,15 +70,13 @@ use Cake\ORM\TableRegistry;
             </a>
             <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
-                    <a class="collapse-item" href="404.html">Photos</a>
-                    <a class="collapse-item" href="blank.html">Videos</a>
+                    <a class="collapse-item" href="<?= $this->Url->build(['controller' => 'Recordings', 'action' => 'all',0])?>">Photos</a>
+                    <a class="collapse-item" href="<?= $this->Url->build(['controller' => 'Recordings', 'action' => 'all',1])?>">Videos</a>
                 </div>
             </div>
         </li>
-
-
         <li class="nav-item"> <!-- Nav Item - Charts -->
-            <a class="nav-link" href="charts.html">
+            <a class="nav-link" href="<?= $this->Url->build(['controller'=>'Recordings','action'=>'statics'])?>">
                 <i class="fas fa-fw fa-chart-area"></i>
                 <span>Statics</span></a>
         </li>
@@ -96,7 +94,7 @@ use Cake\ORM\TableRegistry;
                 <div class="bg-white py-2 collapse-inner rounded">
                     <h6 class="collapse-header">Components:</h6>
                     <a class="collapse-item" href="<?= $this->Url->build(['controller'=>'Users','action'=>'index'])?>">View</a>
-                    <a class="collapse-item" href="<?= $this->Url->build(['controller'=>'Users','action'=>'passwd'])?>">Change password</a>
+                    <a class="collapse-item" href="<?= $this->Url->build(['controller'=>'Users','action'=>'setpw'])?>">Change password</a>
                 </div>
             </div>
         </li>
