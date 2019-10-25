@@ -24,12 +24,6 @@ echo $this->Html->script('/vendor/sbadmin2/bootstrap/js/bootstrap.bundle.min.js'
 echo $this->Html->script('/vendor/sbadmin2/jquery-easing/jquery.easing.min.js');
 // Custom scripts for all pages
 echo $this->Html->script('sbadmin2/sb-admin-2.min.js');
-// Page level plugins
-echo $this->Html->script('/vendor/sbadmin2/chart.js/Chart.min.js');
-// Page level custom scripts
-echo $this->Html->script('sbadmin2/demo/chart-area-demo.js');
-echo $this->Html->script('sbadmin2/demo/chart-pie-demo.js');
-
 use Cake\ORM\TableRegistry;
 
 ?>
@@ -253,5 +247,11 @@ use Cake\ORM\TableRegistry;
     </div>
 </div>
 </body>
-
+<?php
+// Page level plugins
+echo $this->Html->script('/vendor/sbadmin2/chart.js/Chart.min.js');
+// Page level custom scripts
+echo $this->Html->script('sbadmin2/demo/chart-area-demo.js');
+echo $this->Html->script('sbadmin2/demo/chart-pie-demo.js');
+?>
 </html>
