@@ -112,6 +112,8 @@ class UsersController extends AppController
             $user = $this->Auth->identify();
             if ($user){
                 $this->Auth->setUser($user);
+                $this->Flash->success('Login Successfully');
+                return $this->redirect(['controller'=>'Pages','action'=>'home']);
             } else {
                 $this->Flash->error('Oops, Username or password error');
             }
@@ -125,6 +127,6 @@ class UsersController extends AppController
 
     public function beforeFilter(Event $event)
     {
-        //$this->Auth->allow(array('login','add','index','delete','edit'));
+        $this->Auth->allow(array('login'));
     }
 }
