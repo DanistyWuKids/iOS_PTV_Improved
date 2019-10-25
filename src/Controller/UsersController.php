@@ -2,6 +2,9 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use Cake\Event\Event;
+use Cake\ORM\Table;
+use Cake\ORM\TableRegistry;
 
 /**
  * Users Controller
@@ -102,5 +105,26 @@ class UsersController extends AppController
         }
 
         return $this->redirect(['action' => 'index']);
+    }
+
+    public function login(){
+        if ($this->request->is('POST')){
+            $user = $this->Auth->identify();
+            if ($user){
+                $this->Auth->setUser($user);
+            } else {
+                $this->Flash->error('Oops, Username or password error');
+            }
+        }
+    }
+
+    public function logout(){
+        $this->Flash->success("You have successfully logout");
+        return $this->redirect($this->Auth->logout());
+    }
+
+    public function beforeFilter(Event $event)
+    {
+        //$this->Auth->allow(array('login','add','index','delete','edit'));
     }
 }
