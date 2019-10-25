@@ -14,9 +14,13 @@ The framework source code can be found here: [cakephp/cakephp](https://github.co
 1. Install following packages on raspberry pi.
 
 ```bash
-$ sudo apt-get install php php-cgi php-intl php-mbstring php-xml php-common
-$ sudo apt-get install sqlite3 php-sqlite3 apache2
+$ sudo apt-get install php php-cgi php-intl php-mbstring php-xml php-common php-mysql apache2
 ```
+
+* Install following package on main server only
+    ```bash
+    $ sudo apt-get install mysql-server
+    ```
 
 2. After installation, configure the ***/etc/apache2/apache2.conf*** on section ***/var/www*** as follow shows.
 
@@ -28,7 +32,7 @@ $ sudo apt-get install sqlite3 php-sqlite3 apache2
 </Directory>
 ```
 
-3. Download [Composer](https://getcomposer.org/doc/00-intro.md) or update `composer self-update`.
+3. Download and install the [Composer](https://getcomposer.org/doc/00-intro.md) and do update `composer self-update` within the web folder.
 
 4. Clone this project to Apache webroot folder, default location is "/var/www/html".
 ```bash
