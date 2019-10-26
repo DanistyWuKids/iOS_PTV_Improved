@@ -22,7 +22,7 @@ sudo apt-get -y install php php-cgi php-intl php-mbstring php-xml php-common php
 export DEBIAN_FRONTEND="nointeractive"
 sudo debconf-set-selections <<< "mysql-server mysql-server/root_password password qwe123"
 sudo debconf-set-selections <<< "mysql-server mysql-server/root_password_again password qwe123"
-sudo apt-get -y install mysql-server
+sudo apt-get -y install mariadb-server
 echo
 
 echo -e "Installing Composer\n\n"
@@ -69,9 +69,9 @@ if [ -d "comp6733webif" ]; then
   echo -e "\n\nConfiguring app.php\n\n"
   if [ "$uinput" == "y" ]; then
     echo "Adding database to mysql"
-    mysql -u root -pqwe123 < /var/www/html/config/schema/script.sql
+    sudo mysql -u root -pqwe123 < /var/www/html/config/schema/script.sql
     echo "Adding users to mysql"
-    mysql -u root -pqwe123 < /var/www/html/config/schema/adduser.sql
+    sudo mysql -u root -pqwe123 < /var/www/html/config/schema/adduser.sql
   else 
     lineno=`cat /var/www/html/config/app.php | grep "Datasources" -n | cut -d ":" -f 1`
     let appusername=${lineno}+12
