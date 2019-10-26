@@ -16,12 +16,17 @@ The framework source code can be found here: [cakephp/cakephp](https://github.co
 1. Download the script by:
 
 ```bash
-$ wget https://gitlab.cse.unsw.edu.au/z5269058/comp6733webif/blob/master/install.sh
+$ wget https://gitlab.cse.unsw.edu.au/z5269058/comp6733webif/raw/master/install.sh
 OR
 $ wget https://gitlab.com/DanistyWuKids/comp6733webif/raw/master/install.sh
 ```
 
-2. Execute Install script by (Require Superuser privileges):
+2. Adding executable permission to script.
+```bash
+$ chmod +x install.sh
+```
+
+3. Execute Install script by (Require Superuser privileges):
 
 ```bash
 $ sudo ./install.sh
