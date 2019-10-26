@@ -20,7 +20,7 @@ class RecordingsController extends AppController
      */
     public function index()
     {
-        $recordings = $this->paginate($this->Recordings);
+        $recordings = $this->Recordings->find()->toArray();
 
         $this->set(compact('recordings'));
     }
@@ -33,9 +33,10 @@ class RecordingsController extends AppController
      */
     public function all($options = null)
     {
-        $recordings = $this->paginate($this->Recordings);
+        $recordings = $this->Recordings->find()->toArray();
 
         $this->set(compact('recordings'));
+        $this->set(compact('options'));
     }
 
     /**
