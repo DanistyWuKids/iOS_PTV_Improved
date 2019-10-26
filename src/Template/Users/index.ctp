@@ -5,9 +5,9 @@
  */
 $this->assign('title', 'User Management');
 
-echo $this->Html->css("/vendor/sbadmin/datatables/dataTables.bootstrap4.min.css");
-echo $this->Html->script('/vendor/sbadmin/datatables/jquery.dataTables.min.js');
-echo $this->Html->script('/vendor/sbadmin/datatables/dataTables.bootstrap4.min.js');
+echo $this->Html->css("/vendor/sbadmin2/datatables/dataTables.bootstrap4.min.css");
+echo $this->Html->script('/vendor/sbadmin2/datatables/jquery.dataTables.min.js');
+echo $this->Html->script('/vendor/sbadmin2/datatables/dataTables.bootstrap4.min.js');
 echo $this->Html->script('sbadmin2/demo/datatables-demo.js');
 ?>
 <div class="container-fluid">
