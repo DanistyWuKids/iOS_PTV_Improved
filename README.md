@@ -14,12 +14,15 @@ The framework source code can be found here: [cakephp/cakephp](https://github.co
 ### The easiest way (Download one-key install script):
 
 1. Download the script by:
+
 ```bash
 $ wget https://gitlab.cse.unsw.edu.au/z5269058/comp6733webif/blob/master/install.sh
 OR
 $ wget https://gitlab.com/DanistyWuKids/comp6733webif/raw/master/install.sh
 ```
+
 2. Execute Install script by (Require Superuser privileges):
+
 ```bash
 $ sudo ./install.sh
 ```
