@@ -16,7 +16,7 @@ The framework source code can be found here: [cakephp/cakephp](https://github.co
 1. Download the script by:
 
 ```bash
-$ wget https://gist.githubusercontent.com/DanistyWuKids/00b168a1a7903f39c1f16b375c4e80de/raw/7326655d6280150d00c8e0ee14d88f6e79afe548/install.sh
+$ wget https://gist.githubusercontent.com/DanistyWuKids/00b168a1a7903f39c1f16b375c4e80de/raw/614dd2afb7fa28a7ec88194ab4f4e44562fd234c/install.sh
 ```
 
 2. Adding executable permission to script.
@@ -74,7 +74,7 @@ $ sudo systemctl restart apache2
 
 6. Check your php-fpm version and enable it in apache 2
 ```bash
-$ sudo a2enconf php<version>-fpm
+$ sudo a2enconf php7.3-fpm
 $ sudo systemctl restart apache2
 ```
 
@@ -91,6 +91,11 @@ Then visit `http://localhost:8765` to see the welcome page.
 NB: If you are installed by using script and successfully installed all require components. No further configures required.
 
 Read and edit `config/app.php` and setup the `'Datasources'` and any other configuration relevant for your application.
+
+## Credentials of website
+
+Username: admin
+Password: admin
 
 ## Layout
 

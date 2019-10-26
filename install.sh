@@ -18,7 +18,7 @@ echo
 
 echo -e "Install PHP Components\n\n"
 echo
-sudo apt-get -y install php php-cgi php-intl php-mbstring php-xml php-common php-mysql apache2 debconf-utils curl php-cli git unzip
+sudo apt-get -y install php php-cgi php-intl php-mbstring php-xml php-common php-mysql apache2 debconf-utils curl php-cli php-fpm git unzip
 export DEBIAN_FRONTEND="nointeractive"
 sudo debconf-set-selections <<< "mysql-server mysql-server/root_password password qwe123"
 sudo debconf-set-selections <<< "mysql-server mysql-server/root_password_again password qwe123"
@@ -33,6 +33,7 @@ rm -rf composer-setup.php
 echo -e "Configure Apache2\n\n"
 sudo a2enmod rewrite
 sudo a2enmod proxy_fcgi setenvif
+sudo a2enconf php7.3-fpm
 sudo systemctl restart apache2
 
 echo -e "Clean up packages\n\n"
