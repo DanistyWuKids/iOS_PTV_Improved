@@ -34,13 +34,6 @@ echo -e "Configure Apache2\n\n"
 sudo a2enmod rewrite
 sudo a2enmod proxy_fcgi setenvif
 sudo systemctl restart apache2
-lineno=`cat /etc/apache2/apache2.conf | grep "<Directory /var/www/>" -n | cut -d ":" -f 1`
-let lineno=${lineno}+2
-newline=`echo -e '\tAllowOverride All'`
-perl -pe 's/.*/$newline if $. == $lineno' < /etc/apache2/apache2.conf 
-
-echo -e "Restarting Apache Web Engine\n\n"
-sudo systemctl restart apache2
 
 echo -e "Clean up packages\n\n"
 echo
@@ -63,7 +56,10 @@ if [ -d "comp6733webif" ]; then
   echo -e "Install package dependency of server\n\n"
   sudo composer install -n
   cd /var/www/html/config
-  
+  sudo rm -rf /etc/apache2/apache2.conf
+  sudo cp /var/www/html/config/settings/apache2.conf /etc/apache2/apache2.conf
+  echo -e "Restarting Apache Web Engine\n\n"
+  sudo systemctl restart apache2
   echo -e "Is this will be the main server?\n('y' for YES, other input for NO)"
   read uinput
   echo -e "\n\nConfiguring app.php\n\n"
@@ -72,21 +68,15 @@ if [ -d "comp6733webif" ]; then
     sudo mysql -u root -pqwe123 < /var/www/html/config/schema/script.sql
     echo "Adding users to mysql"
     sudo mysql -u root -pqwe123 < /var/www/html/config/schema/adduser.sql
+    rm -rf /var/www/html/config/app.php
+    sudo cp /var/www/html/config/settings/app.server.php /var/www/html/config/app.php
   else 
-    lineno=`cat /var/www/html/config/app.php | grep "Datasources" -n | cut -d ":" -f 1`
-    let appusername=${lineno}+12
-    let apphost=${lineno}+5
-    newline=`echo -e "\t\t'host'=>'raspberrypi.local'"`
-    perl -pe 's/.*/$newline if $. == $apphost' < /var/www/html/config/app.php 
-    newline=`echo -e "\t\t'username'=>'piremote'"`
-    perl -pe 's/.*/$newline if $. == $appusername' < /var/www/html/config/app.php
+    sudo cp /var/www/html/config/settings/app.client.php /var/www/html/config/app.php 
   fi
+  sudo composer install -n 
 fi
 echo -e "You MySQL Preset Cridential Details:"
 echo -e "Username:root\tPassword: qwe123\n\n"
-
-
-
 echo -e "All Done\n\n- Enjoy! -\n\n"
 
 exit 0;
