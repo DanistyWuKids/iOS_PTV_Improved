@@ -47,7 +47,7 @@ use Cake\ORM\TableRegistry;
         <!-- Sidebar - Brand -->
         <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?= $this->Url->build(["controller" => "Pages", "action" => "home"]) ?>">
             <div class="sidebar-brand-icon rotate-n-15">
-                <i class="fas fa-laugh-wink"></i>
+                <i class="fas fa-video"></i>
             </div>
             <div class="sidebar-brand-text mx-3">Oh_My_IoT<sup>Alpha</sup></div>
         </a>
@@ -70,6 +70,7 @@ use Cake\ORM\TableRegistry;
             </a>
             <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
+                    <a class="collapse-item" href="<?= $this->Url->build(['controller' => 'Recordings', 'action' => 'all'])?>">All Files</a>
                     <a class="collapse-item" href="<?= $this->Url->build(['controller' => 'Recordings', 'action' => 'all',0])?>">Photos</a>
                     <a class="collapse-item" href="<?= $this->Url->build(['controller' => 'Recordings', 'action' => 'all',1])?>">Videos</a>
                 </div>
