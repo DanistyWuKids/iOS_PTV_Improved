@@ -23,9 +23,7 @@ class UsersController extends AppController
      */
     public function index()
     {
-        $users = $this->paginate(
-            $this->Users, ['maxLimit' => 99999999,'limit' => 99999999]
-        );
+        $users=$this->Users->find()->toArray();
 
         $this->set(compact('users'));
     }
@@ -120,6 +118,11 @@ class UsersController extends AppController
 
     public function beforeFilter(Event $event)
     {
-        $this->Auth->allow(array('login'));
+        $this->Auth->allow(array('login','forgot'));
+    }
+
+    public function forgot(){
+        $this->Flash->warning("Oh, I\'m really sorry, but I can do nothing.");
+        return $this->redirect($this->referer());
     }
 }

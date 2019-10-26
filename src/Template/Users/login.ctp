@@ -55,7 +55,7 @@ echo $this->Html->script('sbadmin2/sb-admin-2.min.js');
                                 <?= $this->Form->end();?>
                                 <hr>
                                 <div class="text-center">
-                                    <a class="small" href="forgot-password.html">Forgot Password?</a>
+                                    <a class="small" href="<?= $this->Url->build(['controller'=>'Users','actions'=>'forgot'])?>">Forgot Password?</a>
                                 </div>
                             </div>
                         </div>
