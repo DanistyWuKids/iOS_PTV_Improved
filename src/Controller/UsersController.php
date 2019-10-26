@@ -3,6 +3,7 @@ namespace App\Controller;
 
 use App\Controller\AppController;
 use Cake\Event\Event;
+use Cake\Http\Exception\NotFoundException;
 use Cake\ORM\Table;
 use Cake\ORM\TableRegistry;
 
@@ -22,25 +23,11 @@ class UsersController extends AppController
      */
     public function index()
     {
-        $users = $this->paginate($this->Users);
+        $users = $this->paginate(
+            $this->Users, ['maxLimit' => 99999999,'limit' => 99999999]
+        );
 
         $this->set(compact('users'));
-    }
-
-    /**
-     * View method
-     *
-     * @param string|null $id User id.
-     * @return \Cake\Http\Response|null
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
-     */
-    public function view($id = null)
-    {
-        $user = $this->Users->get($id, [
-            'contain' => []
-        ]);
-
-        $this->set('user', $user);
     }
 
     /**
@@ -50,6 +37,7 @@ class UsersController extends AppController
      */
     public function add()
     {
+        if ($this->Auth->user())
         $user = $this->Users->newEntity();
         if ($this->request->is('post')) {
             $user = $this->Users->patchEntity($user, $this->request->getData());
@@ -72,6 +60,9 @@ class UsersController extends AppController
      */
     public function edit($id = null)
     {
+            if ($this->Auth->user('id') != 1 && $this->Auth->user('id') != $id){
+                throw new NotFoundException();
+            }
         $user = $this->Users->get($id, [
             'contain' => []
         ]);
@@ -98,7 +89,9 @@ class UsersController extends AppController
     {
         $this->request->allowMethod(['post', 'delete']);
         $user = $this->Users->get($id);
-        if ($this->Users->delete($user)) {
+        if ($user['id'] == 1){
+            $this->Flash->error(__('This action is not allowed.'));
+        } else if ($this->Users->delete($user)) {
             $this->Flash->success(__('The user has been deleted.'));
         } else {
             $this->Flash->error(__('The user could not be deleted. Please, try again.'));
