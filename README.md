@@ -11,6 +11,20 @@ The framework source code can be found here: [cakephp/cakephp](https://github.co
 
 ## Installation
 
+### The easiest way (Download one-key install script):
+
+1. Download the script by:
+```bash
+$ wget https://gitlab.cse.unsw.edu.au/z5269058/comp6733webif/blob/master/install.sh
+OR
+$ wget https://gitlab.com/DanistyWuKids/comp6733webif/raw/master/install.sh
+```
+2. Execute Install script by (Require Superuser privileges):
+```bash
+$ sudo ./install.sh
+```
+
+### The old-school method:
 1. Install following packages on raspberry pi.
 
 ```bash
@@ -20,7 +34,11 @@ $ sudo apt-get install php php-cgi php-intl php-mbstring php-xml php-common php-
 * Install following package on main server only
     ```bash
     $ sudo apt-get install mysql-server
+    $ mysql_secure_installation
     ```
+    
+    And follow the screen to setting up your MySQL Server.
+
 
 2. After installation, configure the ***/etc/apache2/apache2.conf*** on section ***/var/www*** as follow shows.
 
@@ -54,8 +72,7 @@ $ sudo a2enconf php<version>-fpm
 $ sudo systemctl restart apache2
 ```
 
-You can now either use your machine's webserver to view the default home page at `http://localhost`, or start
-up the built-in webserver with:
+You can now either use your Apache Web Engine by browsing `http://localhost`, or start up the built-in webserver with:
 
 ```bash
 bin/cake server -p 8765
@@ -65,8 +82,9 @@ Then visit `http://localhost:8765` to see the welcome page.
 
 ## Configuration
 
-Read and edit `config/app.php` and setup the `'Datasources'` and any other
-configuration relevant for your application.
+NB: If you are installed by using script and successfully installed all require components. No further configures required.
+
+Read and edit `config/app.php` and setup the `'Datasources'` and any other configuration relevant for your application.
 
 ## Layout
 
