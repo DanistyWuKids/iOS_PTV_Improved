@@ -15,11 +15,11 @@ echo
 #wget https://download.teaviewer.com/download/linux/version_12x/teamviewer-host_armhf.deb
 #sudo dpkg -i teamviewer-host_armhf.dpkg
 #sudo apt-get install -f -y
+echo -e "Install Sensors & system environments\n\n"
+sudo apt-get install python-rpi.gpio python3-rpi.gpio git unzip avahi-daemon debconf-utils
 
 echo -e "Install PHP Components\n\n"
-echo
-sudo apt-get -y install php php-cgi php-intl php-mbstring php-xml php-common php-mysql apache2 debconf-utils curl php-cli php-fpm git unzip avahi-daemon mariadb-client
-echo
+sudo apt-get -y install php php-cgi php-intl php-mbstring php-xml php-common php-mysql apache2 curl php-cli php-fpm mariadb-client
 
 echo -e "Installing Composer\n\n"
 curl -sS https://getcomposer.org/installer -o composer-setup.php
