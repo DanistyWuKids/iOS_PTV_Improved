@@ -18,11 +18,7 @@ echo
 
 echo -e "Install PHP Components\n\n"
 echo
-sudo apt-get -y install php php-cgi php-intl php-mbstring php-xml php-common php-mysql apache2 debconf-utils curl php-cli php-fpm git unzip
-export DEBIAN_FRONTEND="nointeractive"
-sudo debconf-set-selections <<< "mysql-server mysql-server/root_password password qwe123"
-sudo debconf-set-selections <<< "mysql-server mysql-server/root_password_again password qwe123"
-sudo apt-get -y install mariadb-server
+sudo apt-get -y install php php-cgi php-intl php-mbstring php-xml php-common php-mysql apache2 debconf-utils curl php-cli php-fpm git unzip avahi-daemon mariadb-client
 echo
 
 echo -e "Installing Composer\n\n"
@@ -36,20 +32,33 @@ sudo a2enmod proxy_fcgi setenvif
 sudo a2enconf php7.3-fpm
 sudo systemctl restart apache2
 
-echo -e "Clean up packages\n\n"
-echo
-sudo apt-get autoremove
-echo
-
 echo -e "Clone the object from git\n\n"
 cd /var/www
 if [ ! -d "comp6733webif" ]; then
   git clone https://gitlab.cse.unsw.EDU.AU/z5269058/comp6733webif.git
   if [ ! -d "comp6733webif" ]; then
-    echo -e "Git Clone failure, please try execute this script again.\n\n"
-    exit 1;
+    echo -e "Git Clone failure, try again? (y for YES, others for no.)\n\n"
+    read cloneinput
+    if [ "$cloneinput" == "y" ]; then
+      git clone https://gitlab.cse.unsw.EDU.AU/z5269058/comp6733webif.git
+      if [ ! -d "comp6733webif" ]; then
+        echo -e "Git Clone failure, try again? (y for YES, others for no.)\n\n"
+	read cloneinput2
+        if [ "$cloneinput2" == "y" ]; then
+          git clone https://gitlab.cse.unsw.EDU.AU/z5269058/comp6733webif.git
+	  if [ ! -d "comp6733webif" ]; then
+            echo -e "Multiple failes detected";
+          fi;
+        else
+          exit1;
+        fi
+      fi
+    else
+      exit 1;
+    fi
   fi
 fi
+
 if [ -d "comp6733webif" ]; then
   sudo rm -rf html
   sudo mv comp6733webif html
@@ -65,19 +74,31 @@ if [ -d "comp6733webif" ]; then
   read uinput
   echo -e "\n\nConfiguring app.php\n\n"
   if [ "$uinput" == "y" ]; then
+    echo "Start installing database"
+    export DEBIAN_FRONTEND="nointeractive"
+    sudo debconf-set-selections <<< "mysql-server mysql-server/root_password password qwe123"
+    sudo debconf-set-selections <<< "mysql-server mysql-server/root_password_again password qwe123"
+    sudo apt-get -y install mariadb-server
     echo "Adding database to mysql"
     sudo mysql -u root -pqwe123 < /var/www/html/config/schema/script.sql
     echo "Adding users to mysql"
     sudo mysql -u root -pqwe123 < /var/www/html/config/schema/adduser.sql
     rm -rf /var/www/html/config/app.php
     sudo cp /var/www/html/config/settings/app.server.php /var/www/html/config/app.php
+    sudo composer install -n 
+    sudo hostnamectl set-hostname raspberrypis
+    echo -e "You MySQL Preset Cridential Details:"
+    echo -e "Username:root\tPassword: qwe123\n\n"
+    echo -e "Your system is require to reboot before client can access it\n"
+    echo -e "Do you wish to reboot now? (y for yes)"
+    read ureboot
+    if [ "$ureboot" == "y" ]; then
+      sudo reboot
+    fi
   else 
     sudo cp /var/www/html/config/settings/app.client.php /var/www/html/config/app.php 
+    sudo composer install -n 
   fi
-  sudo composer install -n 
 fi
-echo -e "You MySQL Preset Cridential Details:"
-echo -e "Username:root\tPassword: qwe123\n\n"
-echo -e "All Done\n\n- Enjoy! -\n\n"
 
 exit 0;
