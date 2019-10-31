@@ -62,17 +62,17 @@ use Cake\ORM\TableRegistry;
         <hr class="sidebar-divider">    <!-- Divider -->
         <div class="sidebar-heading">Surveillance</div>    <!-- Heading -->
         <li class="nav-item">
-            <a class="nav-link" href="<?= $this->Url->build(['controller'=>'Recordings','action'=>'all'])?>">
+            <a class="nav-link" href="<?= $this->Url->build(['controller'=>'Recordings','action'=>'index'])?>">
                 <i class="fas fa-fw fa-file-archive"></i>
                 <span>All</span></a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="<?= $this->Url->build(['controller' => 'Recordings', 'action' => 'all',0])?>">
+            <a class="nav-link" href="<?= $this->Url->build(['controller' => 'Recordings', 'action' => 'index',0])?>">
                 <i class="fas fa-fw fa-camera"></i>
                 <span>Photos</span></a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="<?= $this->Url->build(['controller' => 'Recordings', 'action' => 'all',0])?>">
+            <a class="nav-link" href="<?= $this->Url->build(['controller' => 'Recordings', 'action' => 'index',1])?>">
                 <i class="fas fa-fw fa-file-video"></i>
                 <span>Videos</span></a>
         </li>

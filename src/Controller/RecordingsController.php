@@ -17,24 +17,12 @@ use Cake\ORM\TableRegistry;
 class RecordingsController extends AppController
 {
     /**
-     * Index method
-     *
-     * @return \Cake\Http\Response|null
-     */
-    public function index()
-    {
-        $recordings = $this->Recordings->find()->toArray();
-
-        $this->set(compact('recordings'));
-    }
-
-    /**
      * All method
      *
      * @param string|null $options Selection of video/photos
      * @return \Cake\Http\Response|null
      */
-    public function all($options = null)
+    public function index($options = null)
     {
         $photopath = TableRegistry::getTableLocator()->get('Settings')->get(1)->toArray()['attribute'];
         $videopath = TableRegistry::getTableLocator()->get('Settings')->get(2)->toArray()['attribute'];
@@ -43,8 +31,17 @@ class RecordingsController extends AppController
         $videos = new Folder();
         $videos->cd($videopath);
 
-        $recordings = $this->Recordings->find()->toArray();
-
+        if ($options == 0){
+            $nums = $this->Recordings->find()->where(['recType'=>'0'])->count();
+            $recordings = $this->Recordings->find()->where(['recType'=>'0'])->toArray();
+        }else if ($options == 1){
+            $nums = $this->Recordings->find()->where(['recType'=>'1'])->count();
+            $recordings = $this->Recordings->find()->where(['recType'=>'1'])->toArray();
+        } else {
+            $nums = $this->Recordings->find()->count();
+            $recordings = $this->Recordings->find()->toArray();
+        }
+        $this->set(compact('nums'));
         $this->set(compact('recordings'));
         $this->set(compact('options'));
     }
