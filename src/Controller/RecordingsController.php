@@ -3,6 +3,9 @@ namespace App\Controller;
 
 use App\Controller\AppController;
 use Cake\Event\Event;
+use Cake\Filesystem\File;
+use Cake\Filesystem\Folder;
+use Cake\ORM\TableRegistry;
 
 /**
  * Recordings Controller
@@ -33,19 +36,17 @@ class RecordingsController extends AppController
      */
     public function all($options = null)
     {
+        $photopath = TableRegistry::getTableLocator()->get('Settings')->get(1)->toArray()['attribute'];
+        $videopath = TableRegistry::getTableLocator()->get('Settings')->get(2)->toArray()['attribute'];
+        $photos = new Folder();
+        $photos->cd($photopath);
+        $videos = new Folder();
+        $videos->cd($videopath);
+
         $recordings = $this->Recordings->find()->toArray();
 
         $this->set(compact('recordings'));
         $this->set(compact('options'));
-    }
-
-    /**
-     * All method
-     *
-     * @return \Cake\Http\Response|null
-     */
-    public function statics(){
-
     }
 
     /**

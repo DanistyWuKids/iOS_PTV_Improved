@@ -25,7 +25,6 @@ echo $this->Html->script('/vendor/sbadmin2/jquery-easing/jquery.easing.min.js');
 // Custom scripts for all pages
 echo $this->Html->script('sbadmin2/sb-admin-2.min.js');
 use Cake\ORM\TableRegistry;
-
 ?>
 <!DOCTYPE html>
 <html>
@@ -62,24 +61,20 @@ use Cake\ORM\TableRegistry;
 
         <hr class="sidebar-divider">    <!-- Divider -->
         <div class="sidebar-heading">Surveillance</div>    <!-- Heading -->
-        <li class="nav-item">    <!-- Nav Item - Pages Collapse Menu -->
-            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
-               aria-expanded="true" aria-controls="collapsePages">
-                <i class="fas fa-fw fa-folder"></i>
-                <span>Recordings</span>
-            </a>
-            <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-                <div class="bg-white py-2 collapse-inner rounded">
-                    <a class="collapse-item" href="<?= $this->Url->build(['controller' => 'Recordings', 'action' => 'all'])?>">All Files</a>
-                    <a class="collapse-item" href="<?= $this->Url->build(['controller' => 'Recordings', 'action' => 'all',0])?>">Photos</a>
-                    <a class="collapse-item" href="<?= $this->Url->build(['controller' => 'Recordings', 'action' => 'all',1])?>">Videos</a>
-                </div>
-            </div>
+        <li class="nav-item">
+            <a class="nav-link" href="<?= $this->Url->build(['controller'=>'Recordings','action'=>'all'])?>">
+                <i class="fas fa-fw fa-file-archive"></i>
+                <span>All</span></a>
         </li>
-        <li class="nav-item"> <!-- Nav Item - Charts -->
-            <a class="nav-link" href="<?= $this->Url->build(['controller'=>'Recordings','action'=>'statics'])?>">
-                <i class="fas fa-fw fa-chart-area"></i>
-                <span>Statics</span></a>
+        <li class="nav-item">
+            <a class="nav-link" href="<?= $this->Url->build(['controller' => 'Recordings', 'action' => 'all',0])?>">
+                <i class="fas fa-fw fa-camera"></i>
+                <span>Photos</span></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="<?= $this->Url->build(['controller' => 'Recordings', 'action' => 'all',0])?>">
+                <i class="fas fa-fw fa-file-video"></i>
+                <span>Videos</span></a>
         </li>
         <hr class="sidebar-divider d-none d-md-block">     <!-- Divider -->
         <div class="sidebar-heading">Interface</div>    <!-- Heading -->
@@ -106,12 +101,12 @@ use Cake\ORM\TableRegistry;
                 <i class="fas fa-fw fa-wrench"></i>
                 <span>Utilities</span>
             </a>
-            <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
-                 data-parent="#accordionSidebar">
+            <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
-                    <a class="collapse-item" href="<?= $this->Url->build(['controller'=>'Settings','action'=>'index'])?>">Set working time</a>
-                    <a class="collapse-item" href="<?= $this->Url->build(['controller'=>'Settings','action'=>'index'])?>">Set backup cloud</a>
-                    <a class="collapse-item" href="<?= $this->Url->build(['controller'=>'Settings','action'=>'index'])?>">Other</a>
+                    <?= $this->Html->link('Set working hours',['controller'=>'settings','action'=>'workingtime'],['class'=>'collapse-item'])?>
+                    <?php //echo $this->Html->link('Set Cloud Storage',['controller'=>'settings','action'=>'index'],['class'=>'collapse-item'])?>
+                    <?= $this->Html->link('Change storage path',['controller'=>'settings','action'=>'editpath'],['class'=>'collapse-item']);?>
+                    <?php //echo $this->Html->link('Others',['controller'=>'settings','action'=>'index'],['class'=>'collapse-item']);?>
                 </div>
             </div>
         </li>
