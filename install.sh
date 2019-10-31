@@ -15,6 +15,10 @@ echo
 #wget https://download.teaviewer.com/download/linux/version_12x/teamviewer-host_armhf.deb
 #sudo dpkg -i teamviewer-host_armhf.dpkg
 #sudo apt-get install -f -y
+
+mkdir /home/pi/Pictures
+mkdir /home/pi/Videos
+
 echo -e "Install Sensors & system environments\n\n"
 sudo apt-get install python-rpi.gpio python3-rpi.gpio git unzip avahi-daemon debconf-utils
 
@@ -87,18 +91,20 @@ if [ -d "comp6733webif" ]; then
     sudo cp /var/www/html/config/settings/app.server.php /var/www/html/config/app.php
     sudo composer install -n 
     sudo hostnamectl set-hostname raspberrypis
+    sudo rm -rf /etc/mysql/mariadb.conf.d/50-server.cnf
+    sudo cp /var/www/html/config/settings/50-server.cnf /etc/mysql/mariadb.conf.d/50-server.cnf
+    echo -e "MySQL is restarting\n\n"
+    sudo /etc/init.d/mysql restart
     echo -e "You MySQL Preset Cridential Details:"
-    echo -e "Username:root\tPassword: qwe123\n\n"
-    echo -e "Your system is require to reboot before client can access it\n"
-    echo -e "Do you wish to reboot now? (y for yes)"
+    echo -e "\tUsername:root\tPassword: qwe123\n\n"
     read ureboot
     if [ "$ureboot" == "y" ]; then
       sudo reboot
     fi
-  else 
+  else
     sudo cp /var/www/html/config/settings/app.client.php /var/www/html/config/app.php 
-    sudo composer install -n 
+    sudo composer install -n
   fi
 fi
-
+echo -e "\n\nAll Done ! Yay!\n\n"
 exit 0;
