@@ -97,6 +97,7 @@ if [ -d "comp6733webif" ]; then
     sudo /etc/init.d/mysql restart
     echo -e "You MySQL Preset Cridential Details:"
     echo -e "\tUsername:root\tPassword: qwe123\n\n"
+    echo -e "\n\nDo you wish to reboot system now?('y' for Yes, other for NO)\n"
     read ureboot
     if [ "$ureboot" == "y" ]; then
       sudo reboot
