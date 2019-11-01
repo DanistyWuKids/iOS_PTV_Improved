@@ -77,7 +77,7 @@ echo $this->Html->script('sbadmin2/demo/datatables-demo.js');
                             <td><?= h($recording->recTime) ?></td>
                             <td><?= h($recording->recIp)?></td>
                             <td class="actions">
-                                <?= $this->Html->link('View', 'http://'.$recording->recIp.'/recordings/view'.$recording->id) ?>
+                                <?= $this->Html->link('View', 'http://'.$recording->recIp.'/recordings/view/'.$recording->id) ?>
                                 <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $recording->id], ['confirm' => __('Are you sure to delete this file?', $recording->id)]) ?>
                             </td>
                         </tr>
