@@ -1,5 +1,6 @@
 <?php
 $this->assign('title','Dashboard');
+use Cake\ORM\TableRegistry;
 ?>
 
 <!-- Page Heading -->
@@ -16,7 +17,8 @@ $this->assign('title','Dashboard');
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                         <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Incidents Static:</div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800">This month: 2</div>
+                        <?php $monthly=TableRegistry::getTableLocator()->get('Recordings')->find()->where(['MONTH(recTime)=MONTH(current_date())','YEAR(recTime)=YEAR(current_date())','recTriggered'=>'1'])->count()?>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">This month: <?=$monthly?></div>
                     </div>
                     <div class="col-auto">
                         <i class="fas fa-calendar fa-2x text-gray-300"></i>
@@ -32,7 +34,8 @@ $this->assign('title','Dashboard');
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                         <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Videos Recorded:</div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800">4 Videos</div>
+                        <?php $videos = TableRegistry::getTableLocator()->get('Recordings')->find()->where(['recType'=>'1'])->count()?>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800"><?=$videos?> Videos</div>
                     </div>
                     <div class="col-auto">
                         <i class="fas fa-file-video fa-2x text-gray-300"></i>
@@ -50,7 +53,8 @@ $this->assign('title','Dashboard');
                         <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Photos Taken</div>
                         <div class="row no-gutters align-items-center">
                             <div class="col-auto">
-                                <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">5 Images</div>
+                                <?php $photos=TableRegistry::getTableLocator()->get('Recordings')->find()->where(['recType'=>'0'])->count()?>
+                                <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800"><?=$photos?> Images</div>
                             </div>
                         </div>
                     </div>
@@ -80,7 +84,7 @@ $this->assign('title','Dashboard');
                         </div>
                     </div>
                     <div class="col-auto">
-                        <i class="fas fa-comments fa-2x text-gray-300"></i>
+                        <i class="fas fa-sd-card fa-2x text-gray-300"></i>
                     </div>
                 </div>
             </div>
