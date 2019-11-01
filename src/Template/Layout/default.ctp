@@ -211,7 +211,6 @@ use Cake\I18n\Time;
         <footer class="sticky-footer bg-white"> <!-- Footer -->
             <div class="container my-auto">
                 <div class="copyright text-center my-auto">
-                    <?php echo debug(Time::now()->subMonths(11)) ?>
                     <span>Copyright &copy; Oh-My-IoT Team @ UNSW 2019-2020</span><br><br>
                     <span>This website is build by team Oh-My-IoT for academic purposes for Unit COMP6733 @ University of New South Wales CSE. </span><br>
                     <span>This website portal was build under MIT License, original template produced by <?= $this->Html->link('BlackrockDigital', 'https://github.com/BlackrockDigital/startbootstrap-sb-admin-2') ?></span>
