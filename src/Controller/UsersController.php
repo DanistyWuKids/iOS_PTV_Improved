@@ -99,6 +99,9 @@ class UsersController extends AppController
     }
 
     public function login(){
+        if ($this->Auth->user('id')!=null){
+            return $this->redirect(['controller'=>'Pages','action'=>'home']);
+        }
         if ($this->request->is('POST')){
             $user = $this->Auth->identify();
             if ($user){
