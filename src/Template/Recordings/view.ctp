@@ -26,9 +26,9 @@ use Cake\ORM\TableRegistry;
         <div class="card-body">
             <?php $filename=$recording->recTime->i18nFormat('yyyy-MM-dd HH:mm:ss')?>
             <?php if($recording->recType == 0){?>
-                <?php echo $this->Html->image($filename.".jpg",['width'=>'100%'])?>
+                <?php echo $this->Html->image("/Pictures/".$filename.".jpg",['width'=>'100%'])?>
             <?php } else if ($recording->recType == 1){?>
-                <?php echo $this->Html->media($filename.".mp4",['width'=>'100%','controls','autoplay'])?>
+                <?php echo $this->Html->media("/Videos/".$filename.".mp4",['width'=>'100%','type'=>'video/mp4','controls','autoplay'])?>
             <?php }?>
         </div>
     </div>
