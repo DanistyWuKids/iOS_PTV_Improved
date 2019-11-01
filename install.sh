@@ -16,8 +16,13 @@ echo
 #sudo dpkg -i teamviewer-host_armhf.dpkg
 #sudo apt-get install -f -y
 
-mkdir /home/pi/Pictures
-mkdir /home/pi/Videos
+cd /home/pi
+if [ -d "Pictures" ]; then
+  rm -rf /home/pi/Pictures
+fi
+if [ -d "Videos" ]; then
+  rm -rf /home/pi/Videos
+fi
 
 echo -e "Install Sensors & system environments\n\n"
 sudo apt-get install python-rpi.gpio python3-rpi.gpio git unzip avahi-daemon debconf-utils
@@ -67,6 +72,11 @@ if [ -d "comp6733webif" ]; then
   sudo rm -rf html
   sudo mv comp6733webif html
   cd /var/www/html
+  echo -e "Setting folder link for Photos and Videos\n\n"
+  sudo mkdir /var/www/html/webroot/Pictures
+  sudo mkdir /var/www/html/webroot/Videos
+  sudo ls -n /var/www/html/webroot/Pictures /home/pi
+  sudo ls -n /var/www/html/webroot/Videos /home/pi
   echo -e "Install package dependency of server\n\n"
   sudo composer install -n
   cd /var/www/html/config
