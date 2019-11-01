@@ -29,6 +29,27 @@ use Cake\ORM\TableRegistry;
     </div>
 
     <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-warning shadow h-100 py-2" style="max-height: 100px;">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Incidents Static:</div>
+                        <div class="row no-gutters align-items-center">
+                            <div class="col-auto">
+                                <?php $yearly=TableRegistry::getTableLocator()->get('Recordings')->find()->where(['YEAR(recTime)=YEAR(current_date())','recTriggered'=>'1'])->count()?>
+                                <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">This year: <?=$yearly?></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-sd-card fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-3 col-md-6 mb-4">
         <div class="card border-left-success shadow h-100 py-2" style="max-height: 100px;"">
             <div class="card-body">
                 <div class="row no-gutters align-items-center">
@@ -66,30 +87,6 @@ use Cake\ORM\TableRegistry;
         </div>
     </div>
 
-    <div class="col-xl-3 col-md-6 mb-4">
-        <div class="card border-left-warning shadow h-100 py-2" style="max-height: 100px;">
-            <div class="card-body">
-                <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">
-                        <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Used Space:</div>
-                        <div class="row no-gutters align-items-center">
-                            <div class="col-auto">
-                                <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">1.00 GB</div>
-                            </div>
-                            <div class="col">
-                                <div class="progress progress-sm mr-2">
-                                    <div class="progress-bar bg-info" role="progressbar" style="width: 50%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-auto">
-                        <i class="fas fa-sd-card fa-2x text-gray-300"></i>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 </div>
 
 <!-- Content Row -->
