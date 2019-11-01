@@ -108,21 +108,21 @@ class SettingsController extends AppController
             $thisSat = $thisdata['sat0'];
             $thisSun = $thisdata['sun0'];
             for($i=1;$i<24;$i++) {
-                $thisMon=$Mon.$thisdata['mon'.$i];
-                $thisTue=$Tue.$thisdata['tue'.$i];
-                $thisWed=$Wed.$thisdata['wed'.$i];
-                $thisThu=$Thu.$thisdata['thu'.$i];
-                $thisFri=$Fri.$thisdata['fri'.$i];
-                $thisSat=$Sat.$thisdata['sat'.$i];
-                $thisSun=$Sun.$thisdata['sun'.$i];
+                $thisMon=$thisMon.$thisdata['mon'.$i];
+                $thisTue=$thisTue.$thisdata['tue'.$i];
+                $thisWed=$thisWed.$thisdata['wed'.$i];
+                $thisThu=$thisThu.$thisdata['thu'.$i];
+                $thisFri=$thisFri.$thisdata['fri'.$i];
+                $thisSat=$thisSat.$thisdata['sat'.$i];
+                $thisSun=$thisSun.$thisdata['sun'.$i];
             }
-            $Mon = $this->Settings->patchEntity($Mon,$thisMon);
-            $Tue = $this->Settings->patchEntity($Tue,$thisTue);
-            $Wed = $this->Settings->patchEntity($Wed,$thisWed);
-            $Thu = $this->Settings->patchEntity($Thu,$thisThu);
-            $Fri = $this->Settings->patchEntity($Fri,$thisFri);
-            $Sat = $this->Settings->patchEntity($Sat,$thisSat);
-            $Sun = $this->Settings->patchEntity($Sun,$thisSun);
+            $Mon->attribute=$thisMon;
+            $Tue->attribute=$thisTue;
+            $Wed->attribute=$thisWed;
+            $Thu->attribute=$thisThu;
+            $Fri->attribute=$thisFri;
+            $Sat->attribute=$thisSat;
+            $Sun->attribute=$thisSun;
 
             if($this->Settings->save($Mon) && $this->Settings->save($Tue)&& $this->Settings->save($Wed)&& $this->Settings->save($Thu)
                 && $this->Settings->save($Fri)&& $this->Settings->save($Sat)&& $this->Settings->save($Sun)){
