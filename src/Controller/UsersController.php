@@ -104,7 +104,7 @@ class UsersController extends AppController
             if ($user){
                 $this->Auth->setUser($user);
                 $this->Flash->success('Login Successfully');
-                return $this->redirect(['controller'=>'Pages','action'=>'home']);
+                return $this->redirect($this->referer());
             } else {
                 $this->Flash->error('Oops, Username or password error');
             }
