@@ -31,15 +31,17 @@ class RecordingsController extends AppController
         $videos = new Folder();
         $videos->cd($videopath);
 
-        if ($options == 0){
-            $nums = $this->Recordings->find()->where(['recType'=>'0'])->count();
-            $recordings = $this->Recordings->find()->where(['recType'=>'0'])->toArray();
-        }else if ($options == 1){
-            $nums = $this->Recordings->find()->where(['recType'=>'1'])->count();
-            $recordings = $this->Recordings->find()->where(['recType'=>'1'])->toArray();
-        } else {
+        if ($options == null){
             $nums = $this->Recordings->find()->count();
             $recordings = $this->Recordings->find()->toArray();
+        } else {
+            if ($options == 0) {
+                $nums = $this->Recordings->find()->where(['recType' => '0'])->count();
+                $recordings = $this->Recordings->find()->where(['recType' => '0'])->toArray();
+            } else if ($options == 1) {
+                $nums = $this->Recordings->find()->where(['recType' => '1'])->count();
+                $recordings = $this->Recordings->find()->where(['recType' => '1'])->toArray();
+            }
         }
         $this->set(compact('nums'));
         $this->set(compact('recordings'));
