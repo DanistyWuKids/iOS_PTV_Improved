@@ -25,6 +25,7 @@ echo $this->Html->script('/vendor/sbadmin2/jquery-easing/jquery.easing.min.js');
 // Custom scripts for all pages
 echo $this->Html->script('sbadmin2/sb-admin-2.min.js');
 use Cake\ORM\TableRegistry;
+use Cake\I18n\Time;
 ?>
 <!DOCTYPE html>
 <html>
@@ -210,6 +211,7 @@ use Cake\ORM\TableRegistry;
         <footer class="sticky-footer bg-white"> <!-- Footer -->
             <div class="container my-auto">
                 <div class="copyright text-center my-auto">
+                    <?php echo debug(Time::now()->subMonths(11)) ?>
                     <span>Copyright &copy; Oh-My-IoT Team @ UNSW 2019-2020</span><br><br>
                     <span>This website is build by team Oh-My-IoT for academic purposes for Unit COMP6733 @ University of New South Wales CSE. </span><br>
                     <span>This website portal was build under MIT License, original template produced by <?= $this->Html->link('BlackrockDigital', 'https://github.com/BlackrockDigital/startbootstrap-sb-admin-2') ?></span>
@@ -246,7 +248,6 @@ use Cake\ORM\TableRegistry;
 // Page level plugins
 echo $this->Html->script('/vendor/sbadmin2/chart.js/Chart.min.js');
 // Page level custom scripts
-echo $this->Html->script('sbadmin2/demo/chart-area-demo.js');
 echo $this->Html->script('sbadmin2/demo/chart-pie-demo.js');
 ?>
 </html>
@@ -279,5 +280,137 @@ echo $this->Html->script('sbadmin2/demo/chart-pie-demo.js');
                 });
             }
         });
+    });
+</script>
+
+<!-- Page Level Custom Scripts-->
+<script>
+    // Set new default font family and font color to mimic Bootstrap's default styling
+    Chart.defaults.global.defaultFontFamily = 'Nunito', '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
+    Chart.defaults.global.defaultFontColor = '#858796';
+
+    function number_format(number, decimals, dec_point, thousands_sep) {
+        // *     example: number_format(1234.56, 2, ',', ' ');
+        // *     return: '1 234,56'
+        number = (number + '').replace(',', '').replace(' ', '');
+        var n = !isFinite(+number) ? 0 : +number,
+            prec = !isFinite(+decimals) ? 0 : Math.abs(decimals),
+            sep = (typeof thousands_sep === 'undefined') ? ',' : thousands_sep,
+            dec = (typeof dec_point === 'undefined') ? '.' : dec_point,
+            s = '',
+            toFixedFix = function(n, prec) {
+                var k = Math.pow(10, prec);
+                return '' + Math.round(n * k) / k;
+            };
+        // Fix for IE parseFloat(0.55).toFixed(0) = 0;
+        s = (prec ? toFixedFix(n, prec) : '' + Math.round(n)).split('.');
+        if (s[0].length > 3) {
+            s[0] = s[0].replace(/\B(?=(?:\d{3})+(?!\d))/g, sep);
+        }
+        if ((s[1] || '').length < prec) {
+            s[1] = s[1] || '';
+            s[1] += new Array(prec - s[1].length + 1).join('0');
+        }
+        return s.join(dec);
+    }
+
+    // Area Chart Example
+    var ctx = document.getElementById("myAreaChart");
+    var myLineChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: ["<?= Time::now()->subMonths(5)->i18nFormat('MMM')?>",
+                "<?= Time::now()->subMonths(4)->i18nFormat('MMM')?>",
+                "<?= Time::now()->subMonths(3)->i18nFormat('MMM')?>",
+                "<?= Time::now()->subMonths(2)->i18nFormat('MMM')?>",
+                "<?= Time::now()->subMonths(1)->i18nFormat('MMM')?>",
+                "<?= Time::now()->i18nFormat('MMM')?>"],
+            datasets: [{
+                label: "Detected",
+                lineTension: 0.3,
+                backgroundColor: "rgba(78, 115, 223, 0.05)",
+                borderColor: "rgba(78, 115, 223, 1)",
+                pointRadius: 3,
+                pointBackgroundColor: "rgba(78, 115, 223, 1)",
+                pointBorderColor: "rgba(78, 115, 223, 1)",
+                pointHoverRadius: 3,
+                pointHoverBackgroundColor: "rgba(78, 115, 223, 1)",
+                pointHoverBorderColor: "rgba(78, 115, 223, 1)",
+                pointHitRadius: 10,
+                pointBorderWidth: 2,
+                data: [<?= TableRegistry::getTableLocator()->get('Recordings')->find()->where(['recTriggered>0','MONTH(recTime)'=>Time::now()->subMonths(5)->month,'YEAR(recTime)'=>Time::now()->subMonths(5)->year])->count()?>,
+                    <?= TableRegistry::getTableLocator()->get('Recordings')->find()->where(['recTriggered>0','MONTH(recTime)'=>Time::now()->subMonths(4)->month,'YEAR(recTime)'=>Time::now()->subMonths(4)->year])->count()?>,
+                    <?= TableRegistry::getTableLocator()->get('Recordings')->find()->where(['recTriggered>0','MONTH(recTime)'=>Time::now()->subMonths(3)->month,'YEAR(recTime)'=>Time::now()->subMonths(3)->year])->count()?>,
+                    <?= TableRegistry::getTableLocator()->get('Recordings')->find()->where(['recTriggered>0','MONTH(recTime)'=>Time::now()->subMonths(2)->month,'YEAR(recTime)'=>Time::now()->subMonths(2)->year])->count()?>,
+                    <?= TableRegistry::getTableLocator()->get('Recordings')->find()->where(['recTriggered>0','MONTH(recTime)'=>Time::now()->subMonths(1)->month,'YEAR(recTime)'=>Time::now()->subMonths(1)->year])->count()?>,
+                    <?= TableRegistry::getTableLocator()->get('Recordings')->find()->where(['recTriggered>0','MONTH(recTime)=MONTH(current_date())','YEAR(recTime)=YEAR(current_date())'])->count()?>],
+            }],
+        },
+        options: {
+            maintainAspectRatio: false,
+            layout: {
+                padding: {
+                    left: 10,
+                    right: 25,
+                    top: 25,
+                    bottom: 0
+                }
+            },
+            scales: {
+                xAxes: [{
+                    time: {
+                        unit: 'date'
+                    },
+                    gridLines: {
+                        display: false,
+                        drawBorder: false
+                    },
+                    ticks: {
+                        maxTicksLimit: 7
+                    }
+                }],
+                yAxes: [{
+                    ticks: {
+                        maxTicksLimit: 5,
+                        padding: 10,
+                        // Include a dollar sign in the ticks
+                        callback: function(value, index, values) {
+                            return number_format(value);
+                        }
+                    },
+                    gridLines: {
+                        color: "rgb(234, 236, 244)",
+                        zeroLineColor: "rgb(234, 236, 244)",
+                        drawBorder: false,
+                        borderDash: [2],
+                        zeroLineBorderDash: [2]
+                    }
+                }],
+            },
+            legend: {
+                display: false
+            },
+            tooltips: {
+                backgroundColor: "rgb(255,255,255)",
+                bodyFontColor: "#858796",
+                titleMarginBottom: 10,
+                titleFontColor: '#6e707e',
+                titleFontSize: 14,
+                borderColor: '#dddfeb',
+                borderWidth: 1,
+                xPadding: 15,
+                yPadding: 15,
+                displayColors: false,
+                intersect: false,
+                mode: 'index',
+                caretPadding: 10,
+                callbacks: {
+                    label: function(tooltipItem, chart) {
+                        var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
+                        return datasetLabel + ': ' + number_format(tooltipItem.yLabel);
+                    }
+                }
+            }
+        }
     });
 </script>
