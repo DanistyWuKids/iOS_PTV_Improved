@@ -3,38 +3,33 @@
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Recording $recording
  */
+
+$this->assign('title', 'View Recording');
+use Cake\ORM\TableRegistry;
 ?>
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('Edit Recording'), ['action' => 'edit', $recording->id]) ?> </li>
-        <li><?= $this->Form->postLink(__('Delete Recording'), ['action' => 'delete', $recording->id], ['confirm' => __('Are you sure you want to delete # {0}?', $recording->id)]) ?> </li>
-        <li><?= $this->Html->link(__('List Recordings'), ['action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Recording'), ['action' => 'add']) ?> </li>
-    </ul>
-</nav>
-<div class="recordings view large-9 medium-8 columns content">
-    <h3><?= h($recording->id) ?></h3>
-    <table class="vertical-table">
-        <tr>
-            <th scope="row"><?= __('RecIp') ?></th>
-            <td><?= h($recording->recIp) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Id') ?></th>
-            <td><?= $this->Number->format($recording->id) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('RecTriggered') ?></th>
-            <td><?= $this->Number->format($recording->recTriggered) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('RecType') ?></th>
-            <td><?= $this->Number->format($recording->recType) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('RecTime') ?></th>
-            <td><?= h($recording->recTime) ?></td>
-        </tr>
-    </table>
+<div class="container-fluid">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a><?= $this->Html->link('Dashboard', ['controller' => 'Pages', 'action' => 'index']) ?></a>
+        </li>
+        <li class="breadcrumb-item">Recordings</li>
+        <li class="breadcrumb-item active">View Recordings</li>
+    </ol>
+
+    <h1 class="h3 mb-2 text-gray-800"><?= __('View Recording') ?></h1>
+    <p class="mb-4"><br>
+        Your recording information will be shown here
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Recordings</h6>
+        </div>
+        <div class="card-body">
+            <?php $filename=$recording->recTime->i18nFormat('yyyy-MM-dd HH:mm:ss')?>
+            <?php if($recording->recType == 0){?>
+                <?php echo $this->Html->image($filename.".jpg",['width'=>'100%'])?>
+            <?php } else if ($recording->recType == 1){?>
+                <?php echo $this->Html->media($filename.".mp4",['width'=>'100%','controls','autoplay'])?>
+            <?php }?>
+        </div>
+    </div>
 </div>
