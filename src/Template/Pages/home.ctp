@@ -170,9 +170,14 @@ use Cake\ORM\TableRegistry;
                 <h6 class="m-0 font-weight-bold text-primary">Latest Image</h6>
             </div>
             <div class="card-body">
-                <p>Here shows the latest captured images</p>
+                <p>Here shows the latest captured images on this device</p>
                 <div class="text-center">
-                    <?= $this->Html->image('sbadmin2/undraw_posting_photo.svg',['class'=>'img-fluid px-3 px-sm-4 mt-3 mb-4','style'=>'width: 25rem'])?>
+                    <?php $item=TableRegistry::getTableLocator()->get('recordings')->find()->orderDesc('recTime')->first();?>
+                    <?php if ($item == null){
+                        echo $this->Html->image('sbadmin2/undraw_posting_photo.svg',['class'=>'img-fluid px-3 px-sm-4 mt-3 mb-4','style'=>'width: 25rem']);
+                    } else {
+                        echo $this->requestAction('http://'.$item['recIp'].'/recordings/poll/'.$item['id']);
+                    } ?>
                 </div>
             </div>
         </div>

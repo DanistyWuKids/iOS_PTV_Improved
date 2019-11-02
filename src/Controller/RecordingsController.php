@@ -64,48 +64,13 @@ class RecordingsController extends AppController
         $this->set('recording', $recording);
     }
 
-    /**
-     * Add method
-     *
-     * @return \Cake\Http\Response|null Redirects on successful add, renders view otherwise.
-     */
-    public function add()
-    {
-        $recording = $this->Recordings->newEntity();
-        if ($this->request->is('post')) {
-            $recording = $this->Recordings->patchEntity($recording, $this->request->getData());
-            if ($this->Recordings->save($recording)) {
-                $this->Flash->success(__('The recording has been saved.'));
-
-                return $this->redirect(['action' => 'index']);
-            }
-            $this->Flash->error(__('The recording could not be saved. Please, try again.'));
-        }
-        $this->set(compact('recording'));
-    }
-
-    /**
-     * Edit method
-     *
-     * @param string|null $id Recording id.
-     * @return \Cake\Http\Response|null Redirects on successful edit, renders view otherwise.
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
-     */
-    public function edit($id = null)
+    public function poll($id = null)
     {
         $recording = $this->Recordings->get($id, [
             'contain' => []
         ]);
-        if ($this->request->is(['patch', 'post', 'put'])) {
-            $recording = $this->Recordings->patchEntity($recording, $this->request->getData());
-            if ($this->Recordings->save($recording)) {
-                $this->Flash->success(__('The recording has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
-            }
-            $this->Flash->error(__('The recording could not be saved. Please, try again.'));
-        }
-        $this->set(compact('recording'));
+        $this->set('recording', $recording);
     }
 
     /**
@@ -130,6 +95,6 @@ class RecordingsController extends AppController
 
     public function beforeFilter(Event $event)
     {
-        $this->Auth->allow(['view']);
+        $this->Auth->allow(['view','photo']);
     }
 }

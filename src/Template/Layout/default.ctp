@@ -158,18 +158,18 @@ use Cake\I18n\Time;
                     </li>
 
                     <li class="nav-item dropdown no-arrow mx-1">    <!-- Nav Item - temporary disable detection -->
-                        <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button">
+                        <a class="nav-link" href="#" role="button">
                             <i class="fas fa-pause fa-fw"></i>
                         </a>
                     </li>
                     <li class="nav-item dropdown no-arrow mx-1">    <!-- Nav Item - shutdown -->
-                        <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button">
+                        <a class="nav-link" href="#" data-toggle="model" data-target="#shutdownModal">
                             <i class="fas fa-power-off fa-fw"></i>
                         </a>
                     </li>
                     <li class="nav-item dropdown no-arrow mx-1">    <!-- Nav Item - restart -->
-                        <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button">
-                            <i class="fas fa-undo fa-fw"></i>
+                        <a class="nav-link dropdown-item" href="#" data-toggle="model" data-target="#rebootModal">
+                            <i class="fas fa-undo fa-fw fa-sm mr-2"></i>
                         </a>
                     </li>
 
@@ -186,12 +186,7 @@ use Cake\I18n\Time;
                             <?php echo $this->Html->image('https://picsum.photos/60/60/?random',['class'=>'img-profile rounded-circle']); ?>
                         </a>
                         <!-- Dropdown - User Information -->
-                        <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                             aria-labelledby="userDropdown">
-                            <a class="dropdown-item" href="#">
-                                <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                                Settings
-                            </a>
+                        <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                                 <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
@@ -224,8 +219,7 @@ use Cake\I18n\Time;
 <a class="scroll-to-top rounded" href="#page-top"><i class="fas fa-angle-up"></i></a>
 
 <!-- Logout Modal-->
-<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-     aria-hidden="true">
+<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -242,6 +236,45 @@ use Cake\I18n\Time;
         </div>
     </div>
 </div>
+
+<!-- Shutdown Modal-->
+<div class="modal fade" id="shutdownModal" tabindex="-1" role="dialog" aria-labelledby="shutdownModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="shutdownModalLabel">Ready to Shutdown?</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">Select 'Shutdown' if you want to turn off this machine..</div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                <a class="btn btn-primary" href="<?php echo shell_exec('sudo shutdown now')?>">Shutdown</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Shutdown Modal-->
+<div class="modal fade" id="rebootModal" tabindex="-1" role="dialog" aria-labelledby="rebootModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="rebootModalLabel">Ready to Shutdown?</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">Select 'Shutdown' if you want to turn off this machine..</div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                <a class="btn btn-primary" href="<?php echo shell_exec('sudo shutdown now')?>">Shutdown</a>
+            </div>
+        </div>
+    </div>
+</div>
+
 </body>
 <?php
 // Page level plugins
