@@ -72,11 +72,13 @@ if [ -d "comp6733webif" ]; then
   sudo rm -rf html
   sudo mv comp6733webif html
   cd /var/www/html
-  echo -e "Setting folder link for Photos and Videos\n\n"
+  echo -e "Setting up default folder link for Photos and Videos\n\n"
   sudo mkdir /var/www/html/webroot/Pictures
   sudo mkdir /var/www/html/webroot/Videos
   sudo ls -n /var/www/html/webroot/Pictures /home/pi
   sudo ls -n /var/www/html/webroot/Videos /home/pi
+  echo -e "Update permission request\n\n"
+  sudo cp /var/www/html/config/settings/sudoers /etc/sudoers
   echo -e "Install package dependency of server\n\n"
   sudo composer install -n
   cd /var/www/html/config
