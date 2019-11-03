@@ -43,13 +43,57 @@ echo $this->Html->script('/vendor/sbadmin2/datatables/dataTables.bootstrap4.min.
                     <?php for($i=0;$i<24;$i++){?>
                     <tr>
                         <td style="text-align:center"><?= $i?>:00-<?= $i+1?>:00</td>
-                        <td style="text-align:center"><?= $this->Form->checkbox('mon'.$i,['label'=>'']);?></td>
-                        <td style="text-align:center"><?= $this->Form->checkbox('tue'.$i,['label'=>'']);?></td>
-                        <td style="text-align:center"><?= $this->Form->checkbox('wed'.$i,['label'=>'']);?></td>
-                        <td style="text-align:center"><?= $this->Form->checkbox('thu'.$i,['label'=>'']);?></td>
-                        <td style="text-align:center"><?= $this->Form->checkbox('fri'.$i,['label'=>'']);?></td>
-                        <td style="text-align:center"><?= $this->Form->checkbox('sat'.$i,['label'=>'']);?></td>
-                        <td style="text-align:center"><?= $this->Form->checkbox('sun'.$i,['label'=>'']);?></td>
+                        <td style="text-align:center">
+                            <?php if($Mon->attribute[$i]==1){
+                                echo $this->Form->checkbox('mon'.$i,['label'=>'','value'=>$Mon->attribute[$i],'checked']);
+                            } else {
+                                echo $this->Form->checkbox('mon'.$i,['label'=>'','value'=>$Mon->attribute[$i]]);
+                            }?>
+                        </td>
+                        <td style="text-align:center">
+                            <?php if($Tue->attribute[$i]==1){
+                                echo $this->Form->checkbox('tue'.$i,['label'=>'','value'=>$Tue->attribute[$i],'checked']);
+                            } else {
+                                echo $this->Form->checkbox('tue'.$i,['label'=>'','value'=>$Tue->attribute[$i]]);
+                            }?>
+                        </td>
+                        <td style="text-align:center">
+                            <?php if($Wed->attribute[$i]==1){
+                                echo $this->Form->checkbox('wed'.$i,['label'=>'','value'=>$Wed->attribute[$i],'checked']);
+                            } else {
+                                echo $this->Form->checkbox('wed'.$i,['label'=>'','value'=>$Wed->attribute[$i]]);
+                            }?>
+                        </td>
+                        <td style="text-align:center">
+                            <?php if($Thu->attribute[$i]==1){
+                                echo $this->Form->checkbox('thu'.$i,['label'=>'','value'=>$Thu->attribute[$i],'checked']);
+                            } else {
+                                echo $this->Form->checkbox('thu'.$i,['label'=>'','value'=>$Thu->attribute[$i]]);
+                            }?>
+                        </td>
+                        <td style="text-align:center">
+                            <?php if ($Fri->attribute[$i]==1){
+                                echo $this->Form->checkbox('fri'.$i,['label'=>'','value'=>$Fri->attribute[$i],'checked']);
+                            } else {
+                                echo $this->Form->checkbox('fri'.$i,['label'=>'','value'=>$Fri->attribute[$i]]);
+                            } ?>
+                        </td>
+                        <td style="text-align:center">
+                            <?php if ($Sat->attribute[$i]==1) {
+                                echo $this->Form->checkbox('sat' . $i, ['label' => '', 'value' => $Sat->attribute[$i],'checked']);
+                            }else{
+                                echo $this->Form->checkbox('sat' . $i, ['label' => '', 'value' => $Sat->attribute[$i]]);
+                            }
+                            ?>
+                        </td>
+                        <td style="text-align:center">
+                            <?php if ($Sun->attribute[$i]==1) {
+                                echo $this->Form->checkbox('sun' . $i, ['label' => '', 'value' => $Sun->attribute[$i],'checked']);
+                            }else{
+                                echo $this->Form->checkbox('sun' . $i, ['label' => '', 'value' => $Sun->attribute[$i]]);
+                            }
+                            ?>
+                        </td>
                     </tr>
                     <?php }?>
                 </table>
