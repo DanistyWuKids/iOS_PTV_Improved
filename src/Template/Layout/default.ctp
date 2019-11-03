@@ -159,8 +159,12 @@ use Cake\Console\ShellDispatcher;
                     </li>
 
                     <li class="nav-item dropdown no-arrow mx-1">    <!-- Nav Item - temporary disable detection -->
-                        <a class="nav-link" href="#" role="button">
+                        <a class="nav-link" href="<?= $this->Url->build(['controller'=>'Settings','action'=>'changeState'])?>" role="button">
+                            <?php if(TableRegistry::getTableLocator()->get('Settings')->get(4)->toArray()['attribute'] == '1'){?>
                             <i class="fas fa-pause fa-fw"></i>
+                            <?php }else{?>
+                            <i class="fas fa-play fa-fw"></i>
+                            <?php }?>
                         </a>
                     </li>
                     <li class="nav-item dropdown no-arrow mx-1">    <!-- Nav Item - shutdown -->

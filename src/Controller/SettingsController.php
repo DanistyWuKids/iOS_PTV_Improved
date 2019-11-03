@@ -85,6 +85,22 @@ class SettingsController extends AppController
         $this->set('Sun',$Sun);
     }
 
+    public function changeState(){
+        $workingstate = $this->Settings->get(4,['contain'=>[]]);
+        if ($workingstate->attribute == "1"){
+            $workingstate->attribute=0;
+            if ($this->Settings->save($workingstate)){
+                $this->Flash->warning(__('Sensor is now inactive...'));
+            }
+        } else{
+            $workingstate->attribute=1;
+            if ($this->Settings->save($workingstate)){
+                $this->Flash->success(__('Sensor is now activated...'));
+            }
+        }
+        return $this->redirect($this->referer());
+    }
+
     public function beforeFilter(Event $event)
     {
         $this->Auth->allow([]);
