@@ -242,41 +242,9 @@ use Cake\Console\ShellDispatcher;
 <?php
 // Page level plugins
 echo $this->Html->script('/vendor/sbadmin2/chart.js/Chart.min.js');
-// Page level custom scripts
-echo $this->Html->script('sbadmin2/demo/chart-pie-demo.js');
+
 ?>
 </html>
-
-<script type="text/javascript">
-    var url = "ajax/pi.php";
-    $(function () {
-        $(".btn-trigger").click(function () {
-            var text = $(this).text().replace(/ /g, "").replace(/\n/g, "").replace(/\r/g, "").replace(/\t/g, "");
-            var cmd = "";
-            switch (text) {
-                case "shutdown":
-                    cmd = "sudo shutdown -h now";
-                    break;
-                case "restart":
-                    cmd = "sudo reboot";
-                    break;
-            }
-            if (confirm("Are you sure to do this?")) {
-                $.ajax({
-                    type: "POST",
-                    url: url,
-                    data: {
-                        action: "set-linux-cmd",
-                        cmd: cmd
-                    },
-                    success: function (result) {
-                        $(".tip").html(result);
-                    }
-                });
-            }
-        });
-    });
-</script>
 
 <!-- Page Level Custom Scripts-->
 <script>
@@ -407,5 +375,44 @@ echo $this->Html->script('sbadmin2/demo/chart-pie-demo.js');
                 }
             }
         }
+    });
+</script>
+<script>
+    // Set new default font family and font color to mimic Bootstrap's default styling
+    Chart.defaults.global.defaultFontFamily = 'Nunito', '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
+    Chart.defaults.global.defaultFontColor = '#858796';
+
+    // Pie Chart Example
+    var ctx = document.getElementById("myPieChart");
+    var myPieChart = new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+            labels: ["Morning", "Afternoon", "Night"],
+            datasets: [{
+                data: [<?php echo TableRegistry::getTableLocator()->get('Recordings')->find()->where(['recTriggered>0','HOUR(recTime)>6','HOUR(recTime)<=12'])->count()?>,
+                    <?php echo TableRegistry::getTableLocator()->get('Recordings')->find()->where(['recTriggered>0','HOUR(recTime)>12','HOUR(recTime)<=18'])->count()?>,
+                    <?php echo TableRegistry::getTableLocator()->get('Recordings')->find()->where(['recTriggered>0','HOUR(recTime)<=6 or HOUR(recTime)>18'])->count()?>],
+                backgroundColor: ['#4e73df', '#1cc88a', '#36b9cc'],
+                hoverBackgroundColor: ['#2e59d9', '#17a673', '#2c9faf'],
+                hoverBorderColor: "rgba(234, 236, 244, 1)",
+            }],
+        },
+        options: {
+            maintainAspectRatio: false,
+            tooltips: {
+                backgroundColor: "rgb(255,255,255)",
+                bodyFontColor: "#858796",
+                borderColor: '#dddfeb',
+                borderWidth: 1,
+                xPadding: 15,
+                yPadding: 15,
+                displayColors: false,
+                caretPadding: 10,
+            },
+            legend: {
+                display: false
+            },
+            cutoutPercentage: 80,
+        },
     });
 </script>

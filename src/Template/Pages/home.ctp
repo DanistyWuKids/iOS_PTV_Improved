@@ -145,13 +145,13 @@ use Cake\ORM\TableRegistry;
                 </div>
                 <div class="mt-4 text-center small">
                     <span class="mr-2">
-                      <i class="fas fa-circle text-primary"></i> Morning
-                    </span>
+                      <i class="fas fa-circle text-primary"></i> Morning (6am-12pm)
+                    </span><br>
                     <span class="mr-2">
-                      <i class="fas fa-circle text-success"></i> Dusk
-                    </span>
+                      <i class="fas fa-circle text-success"></i> Afternoon (12pm-6pm)
+                    </span><br>
                     <span class="mr-2">
-                      <i class="fas fa-circle text-info"></i> Night
+                      <i class="fas fa-circle text-info"></i> Night (6pm-6am)
                     </span>
                 </div>
             </div>
