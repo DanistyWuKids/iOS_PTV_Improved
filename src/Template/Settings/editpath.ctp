@@ -29,8 +29,9 @@ echo $this->Html->script('sbadmin2/demo/datatables-demo.js');
             <div class="table-responsive">
                 <p>Note: File path are case sensitive.</p>
                 <?= $this->Form->create() ?>
-                <?php echo $this->Form->control('photopath',['label'=>'Photo Path:','required'=>'true','class'=>'form-control','type'=>'text','value'=>$photopath->attribute]); ?>
-                <?php echo $this->Form->control('videopath',['label'=>'Video Path:','required'=>'true','class'=>'form-control','tuype'=>'text','value'=>$videopath->attribute]); ?>
+                <?php echo $this->Form->control('path',['label'=>'Store path:','value'=>$path->attribute,'class'=>'form-control','required'=>'true']);?>
+                <?php echo $this->Form->control('photopath',['label'=>'Current Photo Path:','disabled'=>'true','class'=>'form-control','type'=>'text','value'=>$photopath->attribute]); ?>
+                <?php echo $this->Form->control('videopath',['label'=>'Current Video Path:','disabled'=>'true','class'=>'form-control','tuype'=>'text','value'=>$videopath->attribute]); ?>
                 <br><br>
                 <?= $this->Form->button('Submit',['class'=>'btn btn-primary']) ?>
                 <?= $this->Form->end() ?>

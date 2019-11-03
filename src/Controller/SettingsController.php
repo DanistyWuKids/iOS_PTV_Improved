@@ -18,16 +18,21 @@ class SettingsController extends AppController
     public function editpath(){
         $photopath = $this->Settings->get(1,['contain'=>[]]);
         $videopath = $this->Settings->get(2,['contain'=>[]]);
+        $path = $this->Settings->get(3,['contain'=>[]]);
         if ($this->request->is(['patch','post','put'])){
-            $photopath->attribute=$this->request->getData()['photopath'];
-            $videopath->attribute=$this->request->getData()['videopath'];
+            $path->attribute=$this->request->getData()['path'];
+            $photopath->attribute=$this->request->getData()['path'].'/Pictures';
+            $videopath->attribute=$this->request->getData()['path'].'/Videos';
             if($this->Settings->save($photopath) && $this->Settings->save($videopath)){
+                shell_exec('ln -sfn /var/www/html/webroot/Pictures '.$this->request->getData()['path']);
+                shell_exec('ln -sfn /var/www/html/webroot/Videos '.$this->request->getData()['path']);
                 $this->Flash->success(__('New path has been saved correctly, please wait for moment to make changes effect.'));
                 return $this->redirect($this->referer());
             }
         }
         $this->set(compact('photopath'));
         $this->set(compact('videopath'));
+        $this->set(compact('path'));
     }
 
     public function workingtime(){
