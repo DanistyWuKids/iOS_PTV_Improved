@@ -15,65 +15,6 @@ use Cake\ORM\TableRegistry;
  */
 class SettingsController extends AppController
 {
-//    /**
-//     * Index method
-//     *
-//     * @return \Cake\Http\Response|null
-//     */
-//    public function index()
-//    {
-//        throw new NotFoundException();
-////        $settings = $this->paginate($this->Settings);
-//
-////        $this->set(compact('settings'));
-//    }
-//
-//
-//    /**
-//     * Add method
-//     *
-//     * @return \Cake\Http\Response|null Redirects on successful add, renders view otherwise.
-//     */
-//    public function add()
-//    {
-//        throw new NotFoundException();
-//        $setting = $this->Settings->newEntity();
-//        if ($this->request->is('post')) {
-//            $setting = $this->Settings->patchEntity($setting, $this->request->getData());
-//            if ($this->Settings->save($setting)) {
-//                $this->Flash->success(__('The setting has been saved.'));
-//
-//                return $this->redirect(['action' => 'index']);
-//            }
-//            $this->Flash->error(__('The setting could not be saved. Please, try again.'));
-//        }
-//        $this->set(compact('setting'));
-//    }
-//
-//    /**
-//     * Edit method
-//     *
-//     * @param string|null $id Setting id.
-//     * @return \Cake\Http\Response|null Redirects on successful edit, renders view otherwise.
-//     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
-//     */
-//    public function edit($id = null)
-//    {
-//        $setting = $this->Settings->get($id, [
-//            'contain' => []
-//        ]);
-//        if ($this->request->is(['patch', 'post', 'put'])) {
-//            $setting = $this->Settings->patchEntity($setting, $this->request->getData());
-//            if ($this->Settings->save($setting)) {
-//                $this->Flash->success(__('The setting has been saved.'));
-//
-//                return $this->redirect(['action' => 'index']);
-//            }
-//            $this->Flash->error(__('The setting could not be saved. Please, try again.'));
-//        }
-//        $this->set(compact('setting'));
-//    }
-
     public function editpath(){
         $photopath = $this->Settings->get(1,['contain'=>[]]);
         $videopath = $this->Settings->get(2,['contain'=>[]]);
