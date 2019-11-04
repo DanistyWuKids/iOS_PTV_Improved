@@ -173,12 +173,12 @@ use Cake\Console\ShellDispatcher;
                         </a>
                     </li>
                     <li class="nav-item dropdown no-arrow mx-1">    <!-- Nav Item - shutdown -->
-                        <a class="nav-link" href="<?php echo shell_exec('sudo /sbin/shutdown -r now')?>" data-toggle="model" data-target="#shutdownModal">
+                        <a class="nav-link" href="<?php echo $this->Url->build(['controller'=>'Settings','action'=>'shutdown'])?>" data-toggle="model" data-target="#shutdownModal">
                             <i class="fas fa-power-off fa-fw"></i>
                         </a>
                     </li>
                     <li class="nav-item dropdown no-arrow mx-1">    <!-- Nav Item - restart -->
-                        <a class="nav-link dropdown-item" href="<?php echo shell_exec('sudo /sbin/reboot');?>" data-toggle="model" data-target="#rebootModal">
+                        <a class="nav-link dropdown-item" href="<?php echo $this->Url->build(['controller'=>'Settings','action'=>'reboot'])?>" data-toggle="model" data-target="#rebootModal">
                             <i class="fas fa-undo fa-fw fa-sm mr-2"></i>
                         </a>
                     </li>

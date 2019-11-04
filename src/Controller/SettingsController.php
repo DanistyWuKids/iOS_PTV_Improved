@@ -101,6 +101,18 @@ class SettingsController extends AppController
         return $this->redirect($this->referer());
     }
 
+    public function shutdown(){
+        $this->Flash->warning(__('System shutdown now'));
+        echo shell_exec('sudo /sbin/shutdown -r now');
+        return $this->redirect($this->referer());
+    }
+
+    public function reboot(){
+        $this->Flash->warning(__('System is now rebooting'));
+        echo shell_exec('sudo /sbin/reboot');
+        return $this->redirect($this->referer());
+    }
+
     public function beforeFilter(Event $event)
     {
         $this->Auth->allow([]);
