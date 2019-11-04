@@ -25,7 +25,7 @@ use Cake\ORM\TableRegistry;
         </div>
         <div class="card-body">
             <?php $hostpath=$recording->recIp?>
-            <?php $filename=$recording->recTime->i18nFormat('yyyy-MM-dd HH:mm:ss')?>
+            <?php $filename=$recording->recTime->i18nFormat('yyyy_MM_dd_HH_mm_ss')?>
             <?php if($recording->recType == 0){?>
                 <?php echo $this->Html->image("/Pictures/".$filename.".jpg",['width'=>'100%'])?>
             <?php } else if ($recording->recType == 1){?>
