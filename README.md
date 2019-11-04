@@ -1,6 +1,7 @@
 # COMP6733 Surveillance Project Web interface
 
-### Oh-My-IoT @ UNSW 2019 Term 3
+## Oh-My-IoT @ UNSW 2019 Term 3
+### Week 8 Project milestone
 
 [![Build Status](https://img.shields.io/travis/cakephp/app/master.svg?style=flat-square)](https://travis-ci.org/cakephp/app)
 [![Total Downloads](https://img.shields.io/packagist/dt/cakephp/app.svg?style=flat-square)](https://packagist.org/packages/cakephp/app)
@@ -34,12 +35,12 @@ $ sudo ./install.sh
 1. Install following packages on raspberry pi.
 
 ```bash
-$ sudo apt-get install php php-cgi php-intl php-mbstring php-xml php-common php-mysql apache2
+$ sudo apt-get -y install php php-cgi php-intl php-mbstring php-xml php-common php-mysql apache2 libapache-mod-php mysql-client
 ```
 
 * Install following package on main server only
     ```bash
-    $ sudo apt-get install mysql-server
+    $ sudo apt-get -y install mysql-server
     $ mysql_secure_installation
     ```
     
@@ -76,6 +77,18 @@ $ sudo systemctl restart apache2
 ```bash
 $ sudo a2enconf php7.3-fpm
 $ sudo systemctl restart apache2
+```
+
+7. Create a soft link to user home directory for picture and video folders
+```bash
+$ sudo ln -sfn /var/www/html/webroot/Pictures /home/pi
+$ sudo ln -sfn /var/www/html/webroot/Videos /home/pi
+```
+
+8. Update sudoers file by adding following lines:
+```bash
+%www-data ALL=NOPASSWD: /sbin/shutdown
+%www-data ALL=NOPASSWD: /sbin/reboot
 ```
 
 You can now either use your Apache Web Engine by browsing `http://localhost`, or start up the built-in webserver with:
