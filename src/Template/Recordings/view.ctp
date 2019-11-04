@@ -29,7 +29,7 @@ use Cake\ORM\TableRegistry;
             <?php if($recording->recType == 0){?>
                 <?php echo $this->Html->image("/Pictures/".$filename.".jpg",['width'=>'100%'])?>
             <?php } else if ($recording->recType == 1){?>
-                <?php echo $this->Html->media("/Videos/".$filename.".mp4",['width'=>'100%','type'=>'video/mp4','controls','autoplay'])?>
+                <?php echo $this->Html->media("/Videos/".$filename.".h264",['width'=>'100%','type'=>'video/mp4','controls','autoplay'])?>
             <?php }?>
         </div>
     </div>

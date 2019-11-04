@@ -103,13 +103,15 @@ class SettingsController extends AppController
 
     public function shutdown(){
         $this->Flash->warning(__('System shutdown now'));
-        echo shell_exec('sudo /sbin/shutdown -r now');
+       $this->redirect($this->refer()); 
+	echo shell_exec('sudo /sbin/shutdown -r now');
         return $this->redirect($this->referer());
     }
 
     public function reboot(){
         $this->Flash->warning(__('System is now rebooting'));
-        echo shell_exec('sudo /sbin/reboot');
+        $this->redirect($this->refer()); 
+	echo shell_exec('sudo /sbin/reboot');
         return $this->redirect($this->referer());
     }
 

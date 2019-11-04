@@ -30,7 +30,7 @@ def sendEmail(filename, date):
     message["Subject"] = subject
     message["Bcc"] = receiver_email  # Recommended for mass emails
     message.attach(MIMEText(body, "plain"))
-    filename = "/var/www/html/Pictures/" + date + ".jpg"
+    filename = "/var/www/html/webroot/Pictures/" + date + ".jpg"
     with open(filename, "rb") as attachment:
         part = MIMEBase("application", "octet-stream")
         part.set_payload(attachment.read())
@@ -72,25 +72,25 @@ def button_callback(channel):
     # capture onto device
     camera.start_preview()
     sleep(1)
-    camera.capture('/var/www/html/Pictures/' + date + '.jpg')
-    print("Captured image at /var/www/html/Pictures/" + date + '.jpg')
-    camera.start_recording("/var/www/html/Videos/" + date + '.h264')
+    camera.capture('/var/www/html/webroot/Pictures/' + date + '.jpg')
+    print("Captured image at /var/www/html/webroot/Pictures/" + date + '.jpg')
+    camera.start_recording("/var/www/html/webroot/Videos/" + date + '.h264')
     sleep(1)
     camera.stop_recording()
-    print("Captured video at /var/www/html/Videos/" + date + '.h264')
+    print("Captured video at /var/www/html/webroot/Videos/" + date + '.h264')
     camera.stop_preview()
     # send email
-    sendEmail(date + ".jpg", date)
+    #sendEmail(date + ".jpg", date)
     # insert record into main server db
-    '''
     conn = pymysql.connect(host=main_server_ip, user="piremote", passwd="raspberry", db="pidb")
     cur = conn.cursor()
-    cur.execute(f"INSERT INTO recordings (recTime,recTriggered,recType,recIp) VALUES ('{date}',1,0,'{ip_addr}');")
-    cur.execute(f"INSERT INTO recordings (recTime,recTriggered,recType,recIp) VALUES ('{date}',1,1,'{ip_addr}');")
+    cur.execute(f"INSERT INTO pidb.recordings(recTime,recTriggered,recType,recIp) VALUES ('{date}',1,0,'{ip_addr}');")
+    print(f"INSERT INTO pidb.recordings(recTime,recTriggered,recType,recIp) VALUES ('{date}',1,0,'{ip_addr}';") 
+    cur.execute(f"INSERT INTO pidb.recordings(recTime,recTriggered,recType,recIp) VALUES ('{date}',1,1,'{ip_addr}');")
     conn.commit()
     cur.close()
     conn.close()
-    '''
+    
    
 
 # this thread periodically retrieves the user's surveillance schedule
