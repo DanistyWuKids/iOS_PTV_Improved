@@ -73,6 +73,10 @@ class RecordingsController extends AppController
         $this->set('recording', $recording);
     }
 
+    public function statics(){
+
+    }
+
     /**
      * Delete method
      *

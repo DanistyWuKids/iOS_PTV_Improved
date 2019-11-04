@@ -78,6 +78,11 @@ use Cake\Console\ShellDispatcher;
                 <i class="fas fa-fw fa-file-video"></i>
                 <span>Videos</span></a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link" href="<?= $this->Url->build(['controller' => 'Recordings', 'action' => 'statics'])?>">
+                <i class="fas fa-fw fa-calculator"></i>
+                <span>Statics</span></a>
+        </li>
         <hr class="sidebar-divider d-none d-md-block">     <!-- Divider -->
         <div class="sidebar-heading">Interface</div>    <!-- Heading -->
 
